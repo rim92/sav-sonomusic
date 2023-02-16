@@ -1,0 +1,237 @@
+<div class="container p-0">
+
+  
+  <h5 class="mb-3">
+    <span *ngIf="this.userdata.editUser.id === ''">Add</span>
+    <span *ngIf="this.userdata.editUser.id !== ''">Edit</span>
+    User
+  </h5>
+
+  
+              
+
+  <form [formGroup]="userForm">
+
+
+
+              
+
+    <div class="card border-0 rounded-0 bg-white">
+      <div class="card-body p-0">
+        <div class="row mx-0">
+          <div class="col-md-12 p-0">
+            <div class="row mx-0 justify-content-between">
+              <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="First Name" formControlName="prenom" autocomplete="off">
+                  <mat-error *ngIf="userForm.get('prenom').dirty || userForm.get('prenom').touched">
+                    <span *ngIf="userForm.get('prenom').hasError('required')">
+                      First name is required!
+                    </span>
+                    <span *ngIf="userForm.get('prenom').hasError('maxlength')">
+                      First name is not more than 20 characters!
+                    </span>
+                    <span *ngIf="userForm.get('prenom').hasError('pattern')">
+                      Enter a valid First name!
+                    </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Last Name" formControlName="nom" autocomplete="off">
+                  <mat-error *ngIf="userForm.get('nom').dirty || userForm.get('nom').touched">
+                    <span *ngIf="userForm.get('nom').hasError('required')">
+                      Last name is required!
+                    </span>
+                    <span *ngIf="userForm.get('nom').hasError('maxlength')">
+                      Last name is not more than 20 characters!
+                    </span>
+                    <span *ngIf="userForm.get('nom').hasError('pattern')">
+                      Enter a valid Last name!
+                    </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+              <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Phone number" formControlName="tel" autocomplete="off">
+                  <mat-error *ngIf="userForm.get('tel').dirty || userForm.get('tel').touched">
+                    <span *ngIf="userForm.get('tel').hasError('required')">
+                      phone number is required!
+                    </span>
+                    
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+              <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Email" formControlName="email" autocomplete="off">
+                  <mat-error *ngIf="userForm.get('email').dirty || userForm.get('email').touched">
+                    <span *ngIf="userForm.get('email').hasError('required')">
+                      Email is required!
+                    </span>
+                    <span *ngIf="userForm.get('email').hasError('pattern')">
+                      Enter a valid email address!
+                    </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+               
+              <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100" color="accent">
+                  <!-- <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="DOB" -->
+                  <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Date "
+                    (dateChange)="date($event)">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker></mat-datepicker>
+                  <mat-error *ngIf="userForm.get('date').dirty || userForm.get('date').touched">
+                    <span *ngIf="userForm.get('date').hasError('required')">
+                      Date  is required!
+                    </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+              <div class="col-md-6 mb-3">
+              
+                <mat-form-field appearance="fill">
+                  <mat-label>Brand</mat-label>
+                  <select matNativeControl required formControlName="marque">
+                    <option value="YAMAHA">YAMAHA</option>
+                    <option value="SOUNDKING">SOUNDKING</option>
+                    <option value="LINE 6">LINE 6</option>
+                    <option value="VERSE">VERSE</option>
+                    <option value="STUDIOMASTER">STUDIOMASTER</option>
+                    <option value="SKYLARK">SKYLARK</option>
+                    <option value="SCHUBERT">SCHUBERT</option>
+                    <option value="OMNITRONIC">OMNITRONIC</option>
+                    <option value="casio">CASIO</option>
+                    <option value="autre">OTHER</option>
+
+                  </select>
+                </mat-form-field>
+                
+                
+                              </div>
+
+
+              <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Product designation" formControlName="designation" autocomplete="off">
+                  <mat-error *ngIf="userForm.get('designation').dirty || userForm.get('designation').touched">
+                    <span *ngIf="userForm.get('designation').hasError('required')">
+                      Product designation is required!
+                    </span>
+                    
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+             
+              <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Year of purchase" formControlName="date_achat" autocomplete="off">
+                  <mat-error *ngIf="userForm.get('date_achat').dirty || userForm.get('date_achat').touched">
+                    <span *ngIf="userForm.get('date_achat').hasError('required')">
+                      Year of purchase  is required!
+                    </span>
+                    
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+              <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Serial number" formControlName="num_serie" autocomplete="off">
+                  <mat-error *ngIf="userForm.get('num_serie').dirty || userForm.get('num_serie').touched">
+                    <span *ngIf="userForm.get('num_serie').hasError('required')">
+                      Serial number is required !
+                    </span>
+                    
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+
+
+
+              
+
+
+
+
+              <div class="col-md-6 mb-3">
+              
+                <mat-form-field appearance="fill">
+                  <mat-label>Problem to report</mat-label>
+                  <select matNativeControl required formControlName="panne_client">
+                    <option value="power supply">Power supply</option>
+                    <option value="noise">Noise</option>
+                    <option value="input channel">Input channel</option>
+                    <option value="output channel">Output channel</option>
+                    <option value="output channel">Other</option>
+                  </select>
+                </mat-form-field>
+                
+                
+                              </div>
+
+
+              
+
+              <div class="col-md-6 mb-3">
+              
+              <label>Warranty</label><br/>
+              <mat-radio-group aria-label="Select an option" formControlName="garantie" >
+                <mat-radio-button value="yes">Yes</mat-radio-button>
+                <mat-radio-button value="no">No</mat-radio-button>
+              </mat-radio-group>
+
+
+
+
+              </div>
+
+
+
+
+
+              <div class="col-md-6 mb-3">
+              
+                <label>Fees</label><br/>
+                <mat-radio-group aria-label="Select an option" formControlName="frais_diagnostic" >
+                  <mat-radio-button value="yes">Paid </mat-radio-button>
+                  <mat-radio-button value="no">Not paid</mat-radio-button>
+                </mat-radio-group>
+  
+  
+  
+  
+                </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer border-0 bg-white d-flex justify-content-between">
+        <button mat-button mat-raised-button (click)="onNoClick()">Cancel</button>
+        <button mat-button mat-raised-button color="primary" 
+          [mat-dialog-close]="userForm.value" (click)="onValidateClick()">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+

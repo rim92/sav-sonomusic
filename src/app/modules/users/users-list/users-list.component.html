@@ -1,0 +1,111 @@
+<div class="container my-5 p-0">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card border-0">
+        <div class="card-header border-0">
+          <h5 class="card-title">All Users</h5>
+        </div>
+        <div class="card-body p-0">
+          <form>
+            <mat-form-field class="pl-0 pl-sm-4 mb-3 mb-sm-0 search-field">
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            <button mat-raised-button class="float-right mr-0 mr-sm-5 mb-3 mb-sm-0" color="primary"
+              matTooltip="Click to Add" (click)="openEditDialog()">
+              <mat-icon matListIcon>add</mat-icon> Add User
+            </button>
+          </form>
+          <div class="table-responsive mat-elevation-z1">
+            <div class="d-flex justify-content-center my-5" *ngIf="loading">
+              <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+
+           
+            <table mat-table *ngIf="!loading" #table matSort matSortActive="Date" matSortDirection="asc"  [dataSource]="dataSource" cdkDrag cdkDropList
+              (cdkDropListDropped)="dropTable($event); table.renderRows()">
+              
+
+
+              <ng-container matColumnDef="Date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="mobile-label pr-2"></span> {{element.date | date:'dd/MMM/yyyy' }}   </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="Client">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="mobile-label pr-2"></span> {{element.prenom}} {{element.nom}}    </td>
+              </ng-container>
+              <ng-container matColumnDef="tel">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tel </th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="mobile-label pr-2"> </span> {{element.tel}} </td>
+              </ng-container>
+              
+
+
+              
+              <ng-container matColumnDef="Désignation">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Designation </th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="mobile-label pr-2"> </span> {{element.designation}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Frais">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Frais  </th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="mobile-label pr-2">   </span> {{element.frais_diagnostic}} </td>
+              </ng-container>
+
+               <ng-container matColumnDef="Etat">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> etat  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <span class="mobile-label pr-2">   </span> non traité</td>
+                  </ng-container>
+  
+  
+   
+                           <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef>Actions </th>
+                <td mat-cell *matCellDef="let element">
+                  <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary"
+                    (click)="openEditDialog(element._id)">
+                    <mat-icon aria-label="Edit">edit profile</mat-icon>
+                  </button>
+
+                  <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary"
+                  (click)="openEditDialog(element)">
+                  <mat-icon aria-label="Edit">build</mat-icon>
+                </button>
+
+                  <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary"
+                    (click)="openEditDialog(element)">
+                    <mat-icon aria-label="print">print</mat-icon>
+                  </button>
+                  <button mat-icon-button matTooltip="Click to Delete" (click)="openDeleteDialog(element)"
+                    class="iconbutton" color="warn">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag cdkDragHandle
+                cdkDragRootElement="mat-row" [cdkDragData]="row" cdkDragLockAxis="y"
+                (cdkDragStarted)="dragStarted($event)" (cdkDragEnded)="dragEnded($event)"
+                (cdkDropListDropped)="dropTable($event)" [cdkDragDisabled]="(isHandset$ | async) === true"></tr>
+            </table>
+            <div class="p-3 d-flex justify-content-center" *ngIf="!loading && allUsers?.length === 0">
+              No Result
+            </div>
+            <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
